@@ -1,5 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
+<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.css'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import React, {Component} from 'react';
@@ -74,6 +74,43 @@ handleDelete = index => {
           this.setState({
               memesList: newMemesList
       })
+=======
+import NavBar from "./components/NavBar"
+import ButtonGenerator from './components/ButtonGenerator';
+import MemeForm from './components/MemeForm'
+import MemeGroup from './components/MemeGroup';
+import { Container,Row, Col, Breadcrumb} from 'react-bootstrap'
+
+function App() {
+  return (
+    <div className="App">
+      <NavBar />
+      <Container fluid="sm">
+        <Row>
+            <Col>
+              <ButtonGenerator />
+              </Col>
+        </Row>
+        <Row>
+          <Col>
+              <MemeForm />
+          </Col>
+        </Row>
+        <Row>
+              <MemeGroup />
+        </Row>
+      </Container>
+      <Breadcrumb>
+  <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+  <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
+    Library
+  </Breadcrumb.Item>
+  <Breadcrumb.Item active>Data</Breadcrumb.Item>
+</Breadcrumb>
+
+    </div>
+  );
+>>>>>>> 6abad897c33fafccc9429316778784a80b5ef9a3
 }
 
   render() {
