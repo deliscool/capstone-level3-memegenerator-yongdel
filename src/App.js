@@ -1,7 +1,9 @@
 import './App.css';
-<<<<<<< HEAD
-import 'bootstrap/dist/css/bootstrap.css'
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import NavBar from "./components/NavBar"
+import ButtonGenerator from './components/ButtonGenerator';
+import MemeForm from './components/MemeForm'
+import MemeGroup from './components/MemeGroup';
+import { Container,Row, Col, Breadcrumb} from 'react-bootstrap'
 import React, {Component} from 'react';
 import MemeCard from "./MemeCard"
 
@@ -74,43 +76,6 @@ handleDelete = index => {
           this.setState({
               memesList: newMemesList
       })
-=======
-import NavBar from "./components/NavBar"
-import ButtonGenerator from './components/ButtonGenerator';
-import MemeForm from './components/MemeForm'
-import MemeGroup from './components/MemeGroup';
-import { Container,Row, Col, Breadcrumb} from 'react-bootstrap'
-
-function App() {
-  return (
-    <div className="App">
-      <NavBar />
-      <Container fluid="sm">
-        <Row>
-            <Col>
-              <ButtonGenerator />
-              </Col>
-        </Row>
-        <Row>
-          <Col>
-              <MemeForm />
-          </Col>
-        </Row>
-        <Row>
-              <MemeGroup />
-        </Row>
-      </Container>
-      <Breadcrumb>
-  <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-  <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-    Library
-  </Breadcrumb.Item>
-  <Breadcrumb.Item active>Data</Breadcrumb.Item>
-</Breadcrumb>
-
-    </div>
-  );
->>>>>>> 6abad897c33fafccc9429316778784a80b5ef9a3
 }
 
   render() {
@@ -125,30 +90,29 @@ function App() {
 
     return (
       <div className="App">
-        <Navbar bg="dark" variant="dark"
-          sticky="top" expand="sm" collapseOnSelect>
-          <Navbar.Brand>
-            <img src={logo} width="40px" height="40px" />{' '}
-            Logo
-          </Navbar.Brand>
-
-          <Navbar.Toggle className="coloring" />
-          <Navbar.Collapse>
-            <Nav>
-              <NavDropdown title="Products">
-                <NavDropdown.Item href="#products/tea">Tea</NavDropdown.Item>
-                <NavDropdown.Item href="#products/coffee">Coffee</NavDropdown.Item>
-                <NavDropdown.Item href="#products/chocolate">Chocolate</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#products/promo">Promo</NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="#blog">Blog</Nav.Link>
-              <Nav.Link href="#about-us">About Us</Nav.Link>
-              <Nav.Link href="#contact-us">Contact Us</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-
-        </Navbar>
+      <NavBar />
+      <Container fluid="sm">
+        <Row>
+            <Col>
+              {/* <ButtonGenerator /> */}
+              </Col>
+        </Row>
+        <Row>
+          <Col>
+              {/* <MemeForm /> */}
+          </Col>
+        </Row>
+        <Row>
+              {/* <MemeGroup /> */}
+        </Row>
+      </Container>
+      <Breadcrumb>
+  <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+  <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
+    Library
+  </Breadcrumb.Item>
+  <Breadcrumb.Item active>Data</Breadcrumb.Item>
+</Breadcrumb>
 
         <div className="content">
           <div className="meme-container">
