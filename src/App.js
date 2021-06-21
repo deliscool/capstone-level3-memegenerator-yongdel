@@ -1,11 +1,11 @@
 import './App.css';
-import NavBar from "./components/NavBar"
+import NavBar from "./components/NavBar";
 import ButtonGenerator from './components/ButtonGenerator';
-import MemeForm from './components/MemeForm'
+import MemeForm from './components/MemeForm';
 import MemeGroup from './components/MemeGroup';
 import { Container,Row, Col, Breadcrumb} from 'react-bootstrap'
 import React, {Component} from 'react';
-import MemeCard from "./MemeCard"
+import MemeCard from "./MemeCard";
 
 class App extends Component {
   constructor() {
@@ -15,12 +15,19 @@ class App extends Component {
       bottomCaption: "",
       randomImage: "",
       imageSrc: [],
-      memesList: []
+      memesList: [],
+      oldMemes: {
+        topCaption: "",
+        bottomCaption: "",
+        randomImage: "",
+        id:"",
+      }
   }
   this.handleChange = this.handleChange.bind(this)
   this.handleSubmit = this.handleSubmit.bind(this)
   this.handleReset = this.handleReset.bind(this)
   this.handleDelete = this.handleDelete.bind(this)
+  this.handleEdit = this.handleEdit.bind(this)
 }
 
 componentDidMount() {
@@ -50,14 +57,16 @@ handleReset = e => {
       bottomCaption: ""
   })
 }
+
 handleSubmit = e => {
   e.preventDefault()
   const getRandomImage = this.state.imageSrc[Math.floor(Math.random() * this.state.imageSrc.length)].url
-  const {topCaption, bottomCaption, randomImage} = this.state
+  const {topCaption, bottomCaption, randomImage, id} = this.state
   const newMeme = {
       bottomCaption: bottomCaption,
       topCaption: topCaption,
-      randomImage: randomImage
+      randomImage: randomImage,
+      id: id
   }
   this.setState(prevState => ({
       memesList: [...prevState.memesList, newMeme]
@@ -78,6 +87,18 @@ handleDelete = index => {
       })
 }
 
+handleEdit(meme){
+  const filteredMemes = this.state.memesList.filter( (m) => {
+      return m.id !== meme.id;
+  });
+
+  this.setState({
+    topCaption: meme.topCaption,
+    bottomCaption: meme.bottomCaption,
+    randomImage: meme.randomImage,
+    memesList: filteredMemes
+  })
+}
   render() {
     const {memesList} = this.state
     const {handleDelete, handleEdit} = this
@@ -86,7 +107,7 @@ handleDelete = index => {
     })
 
     const {bottomCaption, topCaption, randomImage} = this.state
-    const {handleChange, handleSubmit, handleReset} = this
+    const {handleChange, handleSubmit, handleReset} = this.state
 
     return (
       <div className="App">
@@ -106,13 +127,7 @@ handleDelete = index => {
               {/* <MemeGroup /> */}
         </Row>
       </Container>
-      <Breadcrumb>
-  <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-  <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-    Library
-  </Breadcrumb.Item>
-  <Breadcrumb.Item active>Data</Breadcrumb.Item>
-</Breadcrumb>
+      
 
         <div className="content">
           <div className="meme-container">
@@ -137,11 +152,20 @@ handleDelete = index => {
             />
             <button className="button-gen">Generate Meme</button>
             <button className="button-reset" onClick={handleReset}>Reset</button>
+            <button onClick={handleEdit}>Edit</button>
         </form>
           <div className="meme-card-container">
               {memeComponent}
           </div>
         </div>
+
+        <Breadcrumb>
+          <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+          <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
+                Library
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active>Data</Breadcrumb.Item>
+          </Breadcrumb>
       </div>
     )
   } 
