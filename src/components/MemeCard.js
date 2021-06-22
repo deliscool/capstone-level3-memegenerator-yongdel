@@ -1,6 +1,36 @@
-import React from "react"
+import React, {Component} from 'react'
+import ButtonGenerator from './ButtonGenerator'
 
-function MemeCard(props) {
+class MemeCard extends Component {
+    constructor(props) {
+        super(props)
+         this.state= {
+            id: this.props.id,
+            editMode:false,
+            bottomCaption: this.props.bottomCaption,
+            topCaption: this.props.topCaption,
+        }
+
+        this.editToggle = this.editToggle.bind(this)
+        this.handleEdit = this.handleEdit.bind(this)
+    }
+
+    editToggle(e) {
+
+        this.setState(prevState => {
+            return {
+                editMode: !prevState.editMode
+            }
+        })
+    }   
+
+    handleEdit(e) {
+            const { name, value } = e.target
+            this.setState({ [name]: value })
+    }
+
+
+    render(){
 
     const memeStyle = {
         border: "2px solid black",
@@ -12,6 +42,7 @@ function MemeCard(props) {
         width: "100%",
         height: "auto",
     }
+
     const h2Style = {
         textTransform: "uppercase",
         color: "white",
@@ -22,29 +53,41 @@ function MemeCard(props) {
         width: "80%",
         fontSize: "1.3em"
     }
+
     const topCapPosition = {
         top: "0",
         position: "absolute"
     }
+
     const bottomCapPosition = {
         bottom: "0",
         position: "absolute"
     }
+
     const liStyle = {
         listStyle: "none"
     }
 
     return (
+        
+        <div>
+            {this.state.editToggle? 
+        <div>
+        <ButtonGenerator
+        topCaption = {this.props.topCaption} />
+
+        </div>
+        :
         <div className="meme-card" style={memeStyle}>
             <li style={liStyle}>
-                <h2 style={{...h2Style, ...topCapPosition}}>{props.meme.topCaption}</h2>
-                <img style={imageStyle} src={props.meme.randomImage} alt="" />
-                <h2 style={{...h2Style, ...bottomCapPosition}}>{props.meme.bottomCaption}</h2>
+                <h2 style={{...h2Style, ...topCapPosition}}>{this.props.meme.topCaption}</h2>
+                <img style={imageStyle} src={this.props.meme.randomImage} alt="" />
+                <h2 style={{...h2Style, ...bottomCapPosition}}>{this.props.meme.bottomCaption}</h2>
             </li>
-            <button onClick={props.handleDelete}>Delete</button>
-            <button onClick={props.handleEdit}>Edit</button>
-        </div>
-    ) 
-}
 
+            <button onClick={this.props.handleDelete}>Delete</button>
+            <button onClick={this.props.editToggle} id={this.props.id}>Edit</button>
+        </div>
+    }</div>)}}
+        
 export default MemeCard

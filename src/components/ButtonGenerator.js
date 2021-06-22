@@ -10,6 +10,7 @@ class ButtonGenerator extends Component {
       topCaption: "",
       bottomCaption: "",
       randomImage: "",
+      id:"",
       imageSrc: [],
       memesList: []
   }
@@ -49,11 +50,12 @@ handleReset = e => {
 handleSubmit = e => {
   e.preventDefault()
   const getRandomImage = this.state.imageSrc[Math.floor(Math.random() * this.state.imageSrc.length)].url
-  const {topCaption, bottomCaption, randomImage} = this.state
+  const {topCaption, bottomCaption, randomImage, id} = this.state
   const newMeme = {
       bottomCaption: bottomCaption,
       topCaption: topCaption,
-      randomImage: randomImage
+      randomImage: randomImage,
+      id: imageSrc[id],
   }
   this.setState(prevState => ({
       memesList: [...prevState.memesList, newMeme]
@@ -74,14 +76,14 @@ handleDelete = index => {
       })
 }
 
-handleEdit(meme){
-  const filteredMemes = this.state.memesList.filter( (m) => {
-      return m.id !== meme.id;
+handleEdit(meme, index){
+  const filteredMemes = this.state.memesList.filter( (index) => {
+      return index !== meme.index;
   });
   this.setState({
     topCaption: meme.topCaption,
     bottomCaption: meme.bottomCaption,
-    randomImage: meme.randomImage,
+    randomImage: meme.imgUrl,
     memesList: filteredMemes
   })
 }
@@ -89,7 +91,10 @@ handleEdit(meme){
     const {memesList} = this.state
     const {handleDelete, handleEdit} = this
     const memeComponent = memesList.map((img, index) => {
-    return (<MemeCard handleDelete={handleDelete.bind(this, index)} handleEdit={handleEdit} key={img.id} index={index} meme={img}/>)
+    return (
+      <MemeCard 
+      handleDelete={handleDelete.bind(this, index)} 
+      handleEdit={handleEdit} key={img.id} index={index} meme={img}/>)
     })
 
     const {bottomCaption, topCaption, randomImage} = this.state
