@@ -25,9 +25,9 @@ class MemeCard extends Component {
     }   
 
     handleEdit(e) {
-            const { name, value } = e.target
-            this.setState({ [name]: value })
-    }
+    const { name, value } = e.target
+      this.setState({ [name]: value })
+     }
 
 
     render(){
@@ -78,7 +78,9 @@ class MemeCard extends Component {
         randomImage={this.props.randomImage}
         topCaption = {this.props.topCaption}
         bottomCaption= {this.props.bottomCaption} 
-        
+        submit={this.props.handleEdit}
+        editToggle={this.editToggle}
+        editMode={this.state.editMode}
         />
 
         </div>
@@ -91,7 +93,7 @@ class MemeCard extends Component {
             </li>
 
             <button onClick={this.props.handleDelete}>Delete</button>
-            <button onClick={this.props.editToggle} key={this.props.index}>Edit</button>
+            <button onClick={this.editToggle} key={this.props.index}>Edit</button>
         </div>
     }</div>)}}
         

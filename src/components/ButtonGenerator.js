@@ -67,6 +67,7 @@ handleSubmit = e => {
       topCaption: "",
       bottomCaption: ""
   })
+  if (this.props.editMode) this.props.editToggle()
 }
 handleDelete = index => {
       const newMemesList = [...this.state.memesList]
@@ -89,12 +90,12 @@ handleEdit(meme, index){
 }
   render() {
     const {memesList} = this.state
-    const {handleDelete, handleEdit} = this
+    const {handleDelete} = this
     const memeComponent = memesList.map((img, index) => {
     return (
       <MemeCard 
       handleDelete={handleDelete.bind(this, index)} 
-      handleEdit={handleEdit} key={index} meme={img}/>)
+      onClick={this.props.editToggle} key={index} meme={img}/>)
     })
 
     const {bottomCaption, topCaption, randomImage} = this.state
