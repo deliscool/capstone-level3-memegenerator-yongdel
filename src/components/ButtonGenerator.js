@@ -16,7 +16,6 @@ class ButtonGenerator extends Component {
   this.handleChange = this.handleChange.bind(this)
   this.handleSubmit = this.handleSubmit.bind(this)
   this.handleReset = this.handleReset.bind(this)
-  this.handleDelete = this.handleDelete.bind(this)
   this.handleEdit = this.handleEdit.bind(this)
 }
 
@@ -90,7 +89,7 @@ handleEdit(meme){
     const {memesList} = this.state
     const {handleDelete, handleEdit} = this
     const memeComponent = memesList.map((img, index) => {
-    return (<MemeCard handleDelete={handleDelete} handleEdit={handleEdit} key={img.id} index={index} meme={img}/>)
+    return (<MemeCard handleDelete={handleDelete.bind(this, index)} handleEdit={handleEdit} key={img.id} index={index} meme={img}/>)
     })
 
     const {bottomCaption, topCaption, randomImage} = this.state
