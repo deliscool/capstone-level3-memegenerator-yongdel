@@ -94,7 +94,7 @@ handleEdit(meme, index){
     return (
       <MemeCard 
       handleDelete={handleDelete.bind(this, index)} 
-      handleEdit={handleEdit} key={img.id} index={index} meme={img}/>)
+      handleEdit={handleEdit} key={index} meme={img}/>)
     })
 
     const {bottomCaption, topCaption, randomImage} = this.state

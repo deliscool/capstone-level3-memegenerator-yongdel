@@ -74,7 +74,12 @@ class MemeCard extends Component {
             {this.state.editToggle? 
         <div>
         <ButtonGenerator
-        topCaption = {this.props.topCaption} />
+        key={this.props.key}
+        randomImage={this.props.randomImage}
+        topCaption = {this.props.topCaption}
+        bottomCaption= {this.props.bottomCaption} 
+        
+        />
 
         </div>
         :
@@ -86,7 +91,7 @@ class MemeCard extends Component {
             </li>
 
             <button onClick={this.props.handleDelete}>Delete</button>
-            <button onClick={this.props.editToggle} id={this.props.id}>Edit</button>
+            <button onClick={this.props.editToggle} key={this.props.index}>Edit</button>
         </div>
     }</div>)}}
         
