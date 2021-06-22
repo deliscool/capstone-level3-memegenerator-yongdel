@@ -8,12 +8,19 @@ import React from 'react';
 function App (){
   return (
       <div className="App">
-      <NavBar />
-      <Container fluid="sm">
-      <ButtonGenerator />
-      </Container>
-
-       
+        <NavBar />
+        <Container fluid="sm">
+            <ButtonGenerator />
+        </Container>
+        <Breadcrumb>
+          <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+          <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
+            Library
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active>
+            Data
+          </Breadcrumb.Item>
+        </Breadcrumb>
       </div>
     )
   } 

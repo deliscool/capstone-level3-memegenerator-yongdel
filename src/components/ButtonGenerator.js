@@ -55,7 +55,7 @@ handleSubmit = e => {
       bottomCaption: bottomCaption,
       topCaption: topCaption,
       randomImage: randomImage,
-      id: imageSrc[id],
+      id: id,
   }
   this.setState(prevState => ({
       memesList: [...prevState.memesList, newMeme]
