@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css'
-import { Card, Button } from 'react-bootstrap'
+import MemeCard from "./MemeCard";
+
 
 class ButtonGenerator extends Component {
   constructor() {
@@ -16,6 +17,7 @@ class ButtonGenerator extends Component {
   this.handleSubmit = this.handleSubmit.bind(this)
   this.handleReset = this.handleReset.bind(this)
   this.handleDelete = this.handleDelete.bind(this)
+  this.handleEdit = this.handleEdit.bind(this)
 }
 
 componentDidMount() {
@@ -73,6 +75,17 @@ handleDelete = index => {
       })
 }
 
+handleEdit(meme){
+  const filteredMemes = this.state.memesList.filter( (m) => {
+      return m.id !== meme.id;
+  });
+  this.setState({
+    topCaption: meme.topCaption,
+    bottomCaption: meme.bottomCaption,
+    randomImage: meme.randomImage,
+    memesList: filteredMemes
+  })
+}
   render() {
     const {memesList} = this.state
     const {handleDelete, handleEdit} = this
@@ -85,22 +98,6 @@ handleDelete = index => {
 
     return (
       <div className="App">
-      <NavBar />
-      <Container fluid="sm">
-        <Row>
-            <Col>
-              {/* <ButtonGenerator /> */}
-              </Col>
-        </Row>
-        <Row>
-          <Col>
-              {/* <MemeForm /> */}
-          </Col>
-        </Row>
-        <Row>
-              {/* <MemeGroup /> */}
-        </Row>
-      </Container>
 
         <div className="content">
           <div className="meme-container">

@@ -1,11 +1,8 @@
 import './App.css';
 import NavBar from "./components/NavBar"
 import ButtonGenerator from './components/ButtonGenerator';
-import MemeForm from './components/MemeForm'
-import MemeGroup from './components/MemeGroup';
 import { Container, Breadcrumb} from 'react-bootstrap'
 import React, {Component} from 'react';
-import MemeCard from "./MemeCard"
 
 function App (){
   return (
