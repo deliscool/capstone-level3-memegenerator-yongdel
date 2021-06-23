@@ -1,25 +1,67 @@
-import React from "react"
+import React, { Component } from "react"
 import 'bootstrap/dist/css/bootstrap.css'
-import { Card, Button, Form , Col, Row } from 'react-bootstrap'
 
-class MemeForm extends
-    React.Component {
-        render(){
-            return <div>
-        <Card style={{borderWidth: '100px'}} className="text-center">
-          <Card.Header>Meme Form Text</Card.Header>
-            <Card.Body>
-            <Card.Img variant="top" src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iuYSS2JlV9UE/v1/1200x800.png" style={{borderWidth: '100px'}}/>
-              <Card.Text>
-              Enter text here to generate words on your meme
-              </Card.Text>
-              <Button variant="primary">Generate Meme</Button>
-              <br></br>
-              <Button variant="primary">Edit Meme</Button>
-            </Card.Body>
-          <Card.Footer className="text-muted"></Card.Footer>
-        </Card>
-      </div>
+
+
+class MemeForm extends Component {
+    
+    state = {
+        topCaption: this.props.topCaption || "",
+        bottomCaption: this.props.bottomCaption || "",
+        randomImage: this.props.randomImage
     }
+
+    handleChange = e => {
+        const {name, value} = e.target
+        this.setState({[name]: value})
     }
+    handleSubmit =(e) => {
+        e.preventDefault()
+        const memeObj = {
+            topCaption: this.state.topCaption,
+            bottomCaption: this.state.bottomCaption,
+            randomImage: this.props.randomImage
+        }
+        this.props.submit(memeObj, this.props.id)
+        if(this.props.isEdit) this.props.toggleEdit()  
+        
+        // this.props.randomImg ? this.props.randomImg() : do nothing
+        this.props.randomImg && this.props.randomImg()
+        this.setState({
+            topCaption: "",
+            bottomCaption: ""
+        })
+    }
+
+    render() 
+    {
+        return (
+            <div>
+                <div className="meme-container">
+                    <img src={this.props.randomImage} alt="" />
+                    <h2 className="top-cap">{this.state.topCaption}</h2>
+                    <h2 className="bottom-cap">{this.state.bottomCaption}</h2>
+                </div>
+                <form className="meme-caption" onSubmit={this.handleSubmit}>
+                        <input
+                        type="text"
+                        name="topCaption"
+                        placeholder="Top Caption"
+                        value={this.state.topCaption}
+                        onChange={this.handleChange}
+                        />
+                        <input
+                        type="text"
+                        name="bottomCaption"
+                        placeholder="Bottom Caption"
+                        value={this.state.bottomCaption}
+                        onChange={this.handleChange}
+                        />
+                        <button className="button-gen" type="submit">Add Meme</button>
+                </form>
+            </div>
+        )
+    }
+}
+
 export default MemeForm
